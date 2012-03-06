@@ -8,64 +8,28 @@ Author: Michal Prokeš
 Author URI: http://work.kropes.cz
 */
 
-require_once('PSWebServiceLibrary.php');
 
 
 #error_reporting(E_ALL);
-add_action("widgets_init", array('Presta4wp', 'register'));
 add_action('admin_menu', array('Presta4wp','admin_menu'));
 add_action('admin_init', array('Presta4wp','admin_init'));
+add_action('widgets_init', array('Presta4wp','widgets_init'));
+add_action('wp_enqueue_scripts', array('Presta4wp','wp_enque_scripts'));
+
 class Presta4wp {
-  function controlProducts(){
-    echo 'Výpis produktů z home kategorie';
-  }
-  function widgetProducts($args){
-    echo $args['before_widget'];
-    echo $args['before_title'] . 'Položky z obchodu' . $args['after_title'];
-	try
-	{
-	  $options = get_option('Presta4wp_options');
-	  $ws = new PrestaShopWebservice($options["url"], $options["key"], false);
-	  $xml = $ws->get(array('resource' => 'products', 'display'=>'[id,id_default_image,price,condition,link_rewrite,name,description]', 'filter[id_category_default]'=>"[1]", 'filter[active]'=>"[1]" ));
-	  // Here in $xml, a SimpleXMLElement object you can parse
-
-	  echo "<ul>";
-	  foreach ($xml->products->product as $attName => $r){
-		$name = $r->name->xpath("language[@id=6]");
-		$name = (string)$name[0];
-		$description = $r->description->xpath("language[@id=6]");
-		$description = (string)$description[0];
-		$link_rewrite = $r->link_rewrite->xpath("language[@id=6]");
-		$link_rewrite = (string)$link_rewrite[0];
-
-		$id = (string) $r->id;
-		$id_default_image = (string) $r->id_default_image;
-		$price = (string) $r->price;
-		$condition = (string) $r->condition;
-
-
-		$prod = array("name"=>$name,"description"=>$description,"id"=>$id,"price"=>$price,"condition"=>$condition,"link_rewrite"=>$link_rewrite);
-                echo "<li><h3><a href='$options[url]/$id-$link_rewrite.html'>$name</a></h3><p>$description</p><div class='price'>$price Kč</div></li>";
-		#<img src='$options[url]/$id-$id_default_image/$link_rewrite.jpg'><
-	  }
-	  echo "</ul>";
-
-	}
-	catch (PrestaShopWebserviceException $ex)
-	{
-		echo 'Error : '.$ex->getMessage();
-	}
-
-    echo $args['after_widget'];
-  }
-
-
   function options(){
 	echo '<div><h2>Prestashop integration</h2><form action="options.php" method="post">';
 	settings_fields('Presta4wp');
 	do_settings_sections('Presta4wp');
 	echo '<p class="submit"><input type="submit" class="button-primary" value="'.__('Save Changes').'" /></p></form></div>';
 
+
+  }
+
+  function wp_enque_scripts(){
+    wp_enqueue_script( 'jquery.jcarousel', plugins_url('kropes_presta4wp/js/jquery.jcarousel.min.js' ),array('jquery'));
+    wp_enqueue_script( 'jquery.jcarousel.init', plugins_url('kropes_presta4wp/js/jquery.jcarousel.init.js'),array('jquery.jcarousel'));
+    wp_enqueue_style( 'jquery.jcarousel', plugins_url('kropes_presta4wp/css/skins/tango/skin.css'));
 
   }
 
@@ -82,13 +46,6 @@ class Presta4wp {
 	echo "<input id='Presta4wp_url' name='Presta4wp_options[url]' size='40' type='text' value='{$options['url']}' />";
   }
 
-
-
-  function register(){
-    register_sidebar_widget('Prestashop produkty', array('Presta4wp', 'widgetProducts'));
-    register_widget_control('Prestashop produkty', array('Presta4wp', 'controlProducts'));
-  }
-
   function admin_menu(){
     add_options_page('Custom Plugin Page', 'Prestashop4wp', 'manage_options', 'Presta4wp', array('Presta4wp','options'));
   }
@@ -98,6 +55,15 @@ class Presta4wp {
 	add_settings_section('Presta4wp_main', 'Main Settings', array('Presta4wp', 'section_text'),'Presta4wp');
 	add_settings_field('Presta4wp_key', 'Prestashop API Key', array('Presta4wp','setting_key'), 'Presta4wp', 'Presta4wp_main');
 	add_settings_field('Presta4wp_url', 'Prestashop URL', array('Presta4wp','setting_url'), 'Presta4wp', 'Presta4wp_main');
+  }
+
+  function widgets_init(){
+    require_once('KropesPrestaProductsWidget.php');
+    require_once('KropesPrestaProductsSliderWidget.php');
+
+
+    register_widget('KropesPrestaProductsWidget');
+    register_widget('KropesPrestaProductsSliderWidget');
   }
 }
 
