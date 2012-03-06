@@ -11,7 +11,7 @@ Author URI: http://work.kropes.cz
 require_once('PSWebServiceLibrary.php');
 
 
-error_reporting(E_ALL);
+#error_reporting(E_ALL);
 add_action("widgets_init", array('Presta4wp', 'register'));
 add_action('admin_menu', array('Presta4wp','admin_menu'));
 add_action('admin_init', array('Presta4wp','admin_init'));
