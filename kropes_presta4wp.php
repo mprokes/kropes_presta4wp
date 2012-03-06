@@ -45,7 +45,8 @@ class Presta4wp {
 
 
 		$prod = array("name"=>$name,"description"=>$description,"id"=>$id,"price"=>$price,"condition"=>$condition,"link_rewrite"=>$link_rewrite);
-                echo "<li><h3><a href='$options[url]/$id-$link_rewrite.html'>$name</a></h3><p>$description</p><img src='$options[url]/$id-$id_default_image/$link_rewrite.jpg'><div class='price'>$price Kč</div></li>";
+                echo "<li><h3><a href='$options[url]/$id-$link_rewrite.html'>$name</a></h3><p>$description</p><div class='price'>$price Kč</div></li>";
+		#<img src='$options[url]/$id-$id_default_image/$link_rewrite.jpg'><
 	  }
 	  echo "</ul>";
 
