@@ -48,6 +48,38 @@ class Presta4wp {
 	echo "<input id='Presta4wp_url' name='Presta4wp_options[url]' size='40' type='text' value='{$options['url']}' />";
   }
 
+  function setting_psliderli() {
+	$options = get_option('Presta4wp_options');
+	$options['psliderli'] = $options['psliderli'] ? $options['psliderli'] : '<li class="product_list">
+<div class="center_block">
+<a href="{$link}" class="product_img_link" title="{$name}"><img src="{$img}" alt="{$name}" /></a>
+<h3><span class="new">Novinka</span><a href="{$link}" title="{$name}">{$name}</a></h3>
+<p class="product_desc"><a href="{$link}" title="{$name}">{$description}</a></p>
+</div>
+<div class="right_block">
+<span class="price" style="display: inline;">{$price}</span>
+<a class=zbych_add_to_cart_button" rel="ajax_id_product_{$id}" href="{$url}/cs/cart?add&id_product={$id}" title="Přidat do košíku">Přidat do košíku</a>
+<a class="zbych_detail_button" href="{$link}" title="Zobrazit">Zobrazit</a>
+</div>
+</li>';
+	echo "<textarea id='Presta4wp_psliderli' name='Presta4wp_options[psliderli]' >{$options['psliderli']}</textarea>";
+	echo '<div>{$name} {$link} {$img} {$url} {$price} {$description} {$id}</div>';
+  }
+
+  function setting_pli() {
+	$options = get_option('Presta4wp_options');
+	$options['pli'] = $options['pli'] ? $options['pli'] : '<li>
+<div class="thumb"><a href="{$link}" class="img_background"><img width=45 height=45 src="{$img}"></a></div>
+<div class="zbozi"><a href="{$link}">{$name}</a></div>
+<div class="desc"><a href="{$link}">{$description}</a></div>
+<div class="price"><a href="{$link}">Cena {$price},- Kč</a></div>
+</li>';
+	echo "<textarea id='Presta4wp_pli' name='Presta4wp_options[pli]' >{$options['pli']}</textarea>";
+	echo '<div>{$name} {$link} {$img} {$url} {$price} {$description} {$id}</div>';
+  }
+
+
+
   function admin_menu(){
     add_options_page('Custom Plugin Page', 'Prestashop4wp', 'manage_options', 'Presta4wp', array('Presta4wp','options'));
   }
@@ -57,6 +89,10 @@ class Presta4wp {
 	add_settings_section('Presta4wp_main', 'Main Settings', array('Presta4wp', 'section_text'),'Presta4wp');
 	add_settings_field('Presta4wp_key', 'Prestashop API Key', array('Presta4wp','setting_key'), 'Presta4wp', 'Presta4wp_main');
 	add_settings_field('Presta4wp_url', 'Prestashop URL', array('Presta4wp','setting_url'), 'Presta4wp', 'Presta4wp_main');
+
+	add_settings_section('Presta4wp_widgets', 'Widgets Settings', array('Presta4wp', 'section_text'),'Presta4wp');
+	add_settings_field('Presta4wp_psliderli', 'Product Slider source', array('Presta4wp','setting_psliderli'), 'Presta4wp', 'Presta4wp_widgets');
+	add_settings_field('Presta4wp_pli', 'Product  source', array('Presta4wp','setting_pli'), 'Presta4wp', 'Presta4wp_widgets');
   }
 
   function widgets_init(){

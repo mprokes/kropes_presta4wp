@@ -38,14 +38,14 @@ class KropesPrestaProductsWidget extends WP_Widget {
 	{
 	  $options = get_option('Presta4wp_options');
 	  $ws = new PrestaShopWebservice($options["url"], $options["key"], false);
-	  $xml = $ws->get(array('resource' => 'products', 'display'=>'[id,id_default_image,price,condition,link_rewrite,name,description]', 'filter[id_category_default]'=>"[1]", 'filter[active]'=>"[1]" ));
+	  $xml = $ws->get(array('resource' => 'products', 'display'=>'[id,id_default_image,price,condition,link_rewrite,name,description_short]', 'filter[id_category_default]'=>"[1]", 'filter[active]'=>"[1]" ));
 	  // Here in $xml, a SimpleXMLElement object you can parse
 
 	  echo "<ul>";
 	  foreach ($xml->products->product as $attName => $r){
 		$name = $r->name->xpath("language[@id=6]");
 		$name = (string)$name[0];
-		$description = $r->description->xpath("language[@id=6]");
+		$description = $r->description_short->xpath("language[@id=6]");
 		$description = (string)$description[0];
 		$link_rewrite = $r->link_rewrite->xpath("language[@id=6]");
 		$link_rewrite = (string)$link_rewrite[0];
@@ -57,11 +57,15 @@ class KropesPrestaProductsWidget extends WP_Widget {
 
 		
 		$prod = array("name"=>$name,"description"=>$description,"id"=>$id,"price"=>$price,"condition"=>$condition,"link_rewrite"=>$link_rewrite);
-
-                echo "<li><a href='$options[url]/$id-$link_rewrite.html'>$name</a>";
-		if($price) echo " <span class='presta4wp price'>$price Kč</span>";
-		echo "</li>";
-		#<img src='$options[url]/$id-$id_default_image/$link_rewrite.jpg'><
+		$html = $options['pli'];
+		$html = preg_replace('/{\\$name}/',$name,$html);
+		$html = preg_replace('/{\\$link}/',"$options[url]/$id-$link_rewrite.html",$html);
+		$html = preg_replace('/{\\$img}/',"$options[url]/$id-$id_default_image/$link_rewrite.jpg",$html);
+		$html = preg_replace('/{\\$id}/',$id,$html);
+		$html = preg_replace('/{\\$price}/',$price,$html);
+		$html = preg_replace('/{\\$description}/',$description,$html);
+		$html = preg_replace('/{\\$url}/',$options['url'],$html);
+		echo $html;
 	  }
 	  echo "</ul>";
 
