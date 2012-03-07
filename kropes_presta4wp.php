@@ -16,6 +16,8 @@ add_action('admin_init', array('Presta4wp','admin_init'));
 add_action('widgets_init', array('Presta4wp','widgets_init'));
 add_action('wp_enqueue_scripts', array('Presta4wp','wp_enque_scripts'));
 
+require_once("KropesPrestaCategoriesMetabox.php");
+
 class Presta4wp {
   function options(){
 	echo '<div><h2>Prestashop integration</h2><form action="options.php" method="post">';
