@@ -44,6 +44,8 @@ class KropesPrestaProductsWidget extends WP_Widget {
 	  foreach ($xml->category->associations->products->product as $attName => $r){
 		$filtrid[] = (int) $r->id;
           }
+	  $rand_keys = array_rand($filtrid, 3);
+	  $filtrid = array($filtrid[$rand_keys[0]],$filtrid[$rand_keys[1]], $filtrid[$rand_keys[2]] );
 
 	  $xml = $ws->get(array('resource' => 'products', 'display'=>'[id,id_default_image,price,condition,link_rewrite,name,description_short]', 'filter[id]'=>"[".implode('|',$filtrid)."]", 'filter[active]'=>"[1]" ));
 	  // Here in $xml, a SimpleXMLElement object you can parse
