@@ -38,9 +38,16 @@ class KropesPrestaProductsSliderWidget extends WP_Widget {
 	{
 	  $options = get_option('Presta4wp_options');
 	  $ws = new PrestaShopWebservice($options["url"], $options["key"], false);
-	  $xml = $ws->get(array('resource' => 'products', 'display'=>'[id,id_default_image,price,condition,link_rewrite,name,description_short]', 'filter[id_category_default]'=>"[1]", 'filter[active]'=>"[1]" ));
+	  $xml = $ws->get(array('resource' => 'categories', 'id'=>"1", 'filter[active]'=>"[1]" ));
 	  // Here in $xml, a SimpleXMLElement object you can parse
 
+
+	  $filtrid=array();
+	  foreach ($xml->category->associations->products->product as $attName => $r){
+		$filtrid[] = (int) $r->id;
+          }
+
+	  $xml = $ws->get(array('resource' => 'products', 'filter[id]'=>"[".implode('|',$filtrid)."]", 'display'=>'full', 'filter[active]'=>"[1]" ));
 	  echo "<ul class='jcarousel jcarousel-skin-tango'>";
 	  foreach ($xml->products->product as $attName => $r){
 		$name = $r->name->xpath("language[@id=6]");
