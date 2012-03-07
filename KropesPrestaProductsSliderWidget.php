@@ -65,7 +65,7 @@ class KropesPrestaProductsSliderWidget extends WP_Widget {
 		$html = preg_replace('/{\\$img}/',"$options[url]/$id-$id_default_image/$link_rewrite.jpg",$html);
 		$html = preg_replace('/{\\$id}/',$id,$html);
 		$html = preg_replace('/{\\$price}/',$price,$html);
-		$html = preg_replace('/{\\$description}/',preg_escape_back($description),$html);
+		$html = preg_replace('/{\\$description}/', wp_strip_all_tags($description),$html);
 		$html = preg_replace('/{\\$url}/',$options['url'],$html);
 
 		echo $html;
