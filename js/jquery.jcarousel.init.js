@@ -12,8 +12,8 @@ function kolomy_initCallback(carousel) {
 
 jQuery(document).ready(function() {
     jQuery('.jcarousel').jcarousel({
-        initCallback: kolomy_initCallback,
-//       buttonNextHTML: null,
-//        buttonPrevHTML: null,
+       initCallback: kolomy_initCallback,
+       buttonNextHTML: null,
+       buttonPrevHTML: null,
     });
 });
