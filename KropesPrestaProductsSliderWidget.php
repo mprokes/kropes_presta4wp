@@ -79,6 +79,9 @@ class KropesPrestaProductsSliderWidget extends WP_Widget {
 
 	  }
 	  echo "</ul>";
+	  echo '<a id="kolomy-next" class="jcarousel-skin-zbych jcarousel-next jcarousel-next-horizontal ">Next</a>';
+	  echo '<a id="kolomy-prev" class="jcarousel-skin-zbych jcarousel-next jcarousel-next-horizontal ">Prev</a>'
+
 
 	}
 	catch (PrestaShopWebserviceException $ex)

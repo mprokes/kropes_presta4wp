@@ -1,3 +1,12 @@
+.jcarousel-skin-zbych .jcarousel-clip {
+    overflow: hidden;
+}
+
+.jcarousel-skin-zbych .jcarousel-clip-horizontal {
+    width:  90%;
+}
+
+
 .jcarousel-skin-zbych .jcarousel-next-horizontal {
     position: absolute;
     top: 43px;
