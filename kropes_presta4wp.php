@@ -136,7 +136,7 @@ function kropes_presta4wp_assoc_categories($post_id){
           $name = (string)$name[0];
 	?>
 	<li>
-		<a class="img" href=""><img class="category_img" src="<?php echo $options['url']."/c/$c-home/image.jpg"; ?>"></a>
+		<a class="img" href="<?php echo $options['url']."/cs/$c-category"; ?>" ><img class="category_img" src="<?php echo $options['url']."/c/$c-home/image.jpg"; ?>"></a>
 		<h4><?php echo $name; ?></h4>
 	</li>
    <?php endforeach; ?>
