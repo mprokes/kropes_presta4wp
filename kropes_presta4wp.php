@@ -112,7 +112,8 @@ function kropes_presta4wp_assoc_categories($post_id){
 
   $title = get_post_meta( $post_id, 'presta4wp_title', true );
   $phrase = get_post_meta( $post_id, 'presta4wp_phrase', true );
-  $categories = explode(',',get_post_meta( $post_id, 'presta4wp_categories', true ));
+  $categories = get_post_meta( $post_id, 'presta4wp_categories', true );
+  $categories = $categories ? explode(',',$categories) : array();
   if($title || $phrase || count($categories)>0){
 	$options = get_option('Presta4wp_options');
 ?>
@@ -121,7 +122,7 @@ function kropes_presta4wp_assoc_categories($post_id){
 <h3>Navštivte náš <a href="/eshop">e-shop!</a> <?php if($phrase){ echo "$phrase"; } ?></h3>
 
 
-<?php if(count((array)$categories)>0) : ?>
+<?php if(count($categories)>0) : ?>
 <?php
 	  $ws = new PrestaShopWebservice($options["url"], $options["key"], false);
 	  $xml = $ws->get(array('resource' => 'categories', 'display'=>"[id,name]", 'filter[active]'=>"[1]", "filter[id]"=>"[".implode('|',(array)$categories)."]" ));
