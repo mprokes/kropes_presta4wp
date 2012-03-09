@@ -3,7 +3,7 @@
 Plugin Name: Prestashop for Wordpress integration 
 Plugin URI: http://work.kropes.cz/wordpress/kropes_presta4wp
 Description: Prestashop integration into wordpress (widgets) 
-Version: 0.2 
+Version: 0.3 
 Author: Michal Prokeš 
 Author URI: http://work.kropes.cz
 */
@@ -11,6 +11,8 @@ Author URI: http://work.kropes.cz
 
 
 #error_reporting(E_ALL);
+
+require_once('PSWebServiceLibrary.php');
 add_action('admin_menu', array('Presta4wp','admin_menu'));
 add_action('admin_init', array('Presta4wp','admin_init'));
 add_action('widgets_init', array('Presta4wp','widgets_init'));
@@ -106,29 +108,44 @@ class Presta4wp {
 }
 
 
-function kropes_presta4wp_assoc_categories(){
-global $post;
+function kropes_presta4wp_assoc_categories($post_id){
+
+  $title = get_post_meta( $post_id, 'presta4wp_title', true );
+  $phrase = get_post_meta( $post_id, 'presta4wp_phrase', true );
+  $categories = explode(',',get_post_meta( $post_id, 'presta4wp_categories', true ));
+  if($title || $phrase || count($categories)>0){
+	$options = get_option('Presta4wp_options');
 ?>
 <aside class="vypis_kategorii">
-<h2>Máte zájem o <? get_post_meta( $post->ID, 'presta4wp_title', true ); ?>?</h2>
-<h3>Navštivte náš <a href="/eshop">e-shop!</a> Med najdete v těchto kategoriích:</h3>
-<ul class="category_slider">
+<?php if($title){ echo "<h2>Máte zájem o $title?</h2>"; } ?>
+<h3>Navštivte náš <a href="/eshop">e-shop!</a> <?php if($phrase){ echo "$phrase"; } ?></h3>
+
+
+<?php if(count((array)$categories)>0) : ?>
+<?php
+	  $ws = new PrestaShopWebservice($options["url"], $options["key"], false);
+	  $xml = $ws->get(array('resource' => 'categories', 'display'=>"[id,name]", 'filter[active]'=>"[1]", "filter[id]"=>"[".implode('|',(array)$categories)."]" ));
+
+
+?>
+<ul class="category_slider jcarousel jcarousel-skin-zbych'">
+  <?php foreach((array)$categories AS $c) : ?>
+	<?php
+	  $name = (string)array_pop($xml->xpath('categories/category[id='.$c.']/name/language[@id=6]'));
+	?>
 	<li>
-		<a class="img" href=""><img class="category_img"></a>
-		<h4>Název kategorie</h4>
+		<a class="img" href=""><img class="category_img" src="<?php echo $options['url']."/c/$c-home/image.jpg"; ?>"></a>
+		<h4><?php echo $name; ?></h4>
 	</li>
-		<li>
-		<a class="img" href=""><img class="category_img"></a>
-		<h4>Název kategorie</h4>
-	</li>
-		<li>
-		<a class="img" href=""><img class="category_img"></a>
-		<h4>Název kategorie</h4>
-	</li>
+   <?php endforeach; ?>
 </ul>
+<?php endif; ?>
+
+
 <div style="clear: both"></div>
 </aside> <!-- .vypis_kategorii !-->
 <?
+  }
 }
 
 ?>
