@@ -44,8 +44,8 @@ class KropesPrestaProductsWidget extends WP_Widget {
 	  foreach ($xml->category->associations->products->product as $attName => $r){
 		$filtrid[] = (int) $r->id;
           }
-	  $rand_keys = array_rand($filtrid, 3);
-	  $filtrid = array($filtrid[$rand_keys[0]],$filtrid[$rand_keys[1]], $filtrid[$rand_keys[2]] );
+	  $rand_keys = array_rand($filtrid, 4);
+	  $filtrid = array($filtrid[$rand_keys[0]],$filtrid[$rand_keys[1]], $filtrid[$rand_keys[2]],  $filtrid[$rand_keys[3]] );
 
 	  $xml = $ws->get(array('resource' => 'products', 'display'=>'[id,id_default_image,price,condition,link_rewrite,name,description_short]', 'filter[id]'=>"[".implode('|',$filtrid)."]", 'filter[active]'=>"[1]" ));
 	  // Here in $xml, a SimpleXMLElement object you can parse
@@ -69,7 +69,7 @@ class KropesPrestaProductsWidget extends WP_Widget {
 		$html = $options['pli'];
 		$html = preg_replace('/{\\$name}/',$name,$html);
 		$html = preg_replace('/{\\$link}/',"$options[url]/$id-$link_rewrite.html",$html);
-		$html = preg_replace('/{\\$img}/',"$options[url]/$id-$id_default_image/$link_rewrite.jpg",$html);
+		$html = preg_replace('/{\\$img}/',"$options[url]/$id-$id_default_image-small/$link_rewrite.jpg",$html);
 		$html = preg_replace('/{\\$id}/',$id,$html);
 		$html = preg_replace('/{\\$price}/',$price,$html);
 		$html = preg_replace('/{\\$description}/',wp_strip_all_tags($description),$html);
