@@ -31,7 +31,7 @@ class Presta4wp {
   function wp_enque_scripts(){
     wp_enqueue_script( 'jquery.jcarousel', plugins_url('js/jquery.jcarousel.min.js',__FILE__ ),array('jquery'));
     wp_enqueue_script( 'jquery.jcarousel.init', plugins_url('js/jquery.jcarousel.init.js',__FILE__),array('jquery.jcarousel'));
-    wp_enqueue_style( 'jquery.jcarousel', plugins_url('css/skins/tango/skin.css',__FILE__));
+    wp_enqueue_style( 'jquery.jcarousel', plugins_url('css/skins/zbych/skin.css',__FILE__));
 
   }
 

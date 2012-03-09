@@ -1,0 +1,117 @@
+.jcarouse-skin-zbych .jcarousel-container {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+   border-radius: 10px;
+    background: #F0F6F9;
+    border: 1px solid #346F97;
+}
+
+.jcarousel-skin-zbych .jcarousel-direction-rtl {
+	direction: rtl;
+}
+
+.jcarousel-skin-zbych .jcarousel-container-horizontal {
+    width: 100%;
+    padding: 20px 40px;
+}
+
+.jcarousel-skin-zbych .jcarousel-clip {
+    overflow: hidden;
+}
+
+.jcarousel-skin-zbych .jcarousel-clip-horizontal {
+    width:  90%;
+    height: 200px;
+}
+
+.jcarousel-skin-zbych .jcarousel-item {
+    width: 75px;
+    height: 180px;
+}
+
+.jcarousel-skin-zbych .jcarousel-item-horizontal {
+	margin-left: 0;
+    margin-right: 10px;
+}
+
+.jcarousel-skin-zbych .jcarousel-direction-rtl .jcarousel-item-horizontal {
+	margin-left: 10px;
+    margin-right: 0;
+}
+
+.jcarousel-skin-zbych .jcarousel-item-placeholder {
+    background: #fff;
+    color: #000;
+}
+
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-skin-zbych .jcarousel-next-horizontal {
+    position: absolute;
+    top: 43px;
+    right: 5px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: transparent url(zbych_next.png) no-repeat 0 0;
+}
+
+
+.jcarousel-skin-zbych .jcarousel-next-horizontal:hover,
+.jcarousel-skin-zbych .jcarousel-next-horizontal:focus {
+    background: transparent url(zbych_next_hover.png) no-repeat 0 0;
+}
+
+.jcarousel-skin-zbych .jcarousel-direction-rtl .jcarousel-next-horizontal {
+    left: 5px;
+    right: auto;
+    background-image: url(zbych_next.png);
+}
+
+.jcarousel-skin-zbych .jcarousel-direction-rtl .jcarousel-next-horizontal:hover,
+.jcarousel-skin-zbych .jcarousel-direction-rtl .jcarousel-next-horizontal:focus {
+    background-image: url(zbych_next_hover.png);
+}
+
+.jcarousel-skin-zbych .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-zbych .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-zbych .jcarousel-next-disabled-horizontal:focus,
+.jcarousel-skin-zbych .jcarousel-next-disabled-horizontal:active {
+    cursor: default;
+    background-image: url(zbych_next_hover.png);
+}
+
+.jcarousel-skin-zbych .jcarousel-prev-horizontal {
+    position: absolute;
+    top: 43px;
+    left: 5px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: transparent url(zbych_previous.png) no-repeat 0 0;
+}
+
+.jcarousel-skin-zbych .jcarousel-direction-rtl .jcarousel-prev-horizontal {
+    left: auto;
+    right: 5px;
+    background-image: url(zbych_previous.png);
+}
+
+.jcarousel-skin-zbych .jcarousel-prev-horizontal:hover, 
+.jcarousel-skin-zbych .jcarousel-prev-horizontal:focus {
+    background-image: url(zbych_previous_hover.png);
+}
+
+.jcarousel-skin-zbych .jcarousel-prev-horizontal:active {
+    background-image: url(zbych_previous_hover.png);
+}
+
+.jcarousel-skin-zbych .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-zbych .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-zbych .jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-skin-zbych .jcarousel-prev-disabled-horizontal:active {
+    cursor: default;
+    background-image: url(zbych_previous_hover.png);
+}
+
