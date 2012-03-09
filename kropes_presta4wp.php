@@ -131,7 +131,7 @@ function kropes_presta4wp_assoc_categories($post_id){
 <ul class="category_slider jcarousel jcarousel-skin-zbych'">
   <?php foreach((array)$categories AS $c) : ?>
 	<?php
-	  $name = (string)array_pop($xml->xpath('categories/category[id='.$c.']/name/language[@id=6]'));
+	  $name = (string)array_pop((array)$xml->xpath('categories/category[id='.$c.']/name/language[@id=6]'));
 	?>
 	<li>
 		<a class="img" href=""><img class="category_img" src="<?php echo $options['url']."/c/$c-home/image.jpg"; ?>"></a>
