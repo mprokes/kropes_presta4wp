@@ -3,7 +3,7 @@
 Plugin Name: Prestashop for Wordpress integration 
 Plugin URI: http://work.kropes.cz/wordpress/kropes_presta4wp
 Description: Prestashop integration into wordpress (widgets) 
-Version: 0.3 
+Version: 0.4 
 Author: Michal Prokeš 
 Author URI: http://work.kropes.cz
 */
