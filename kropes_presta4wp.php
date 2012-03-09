@@ -3,7 +3,7 @@
 Plugin Name: Prestashop for Wordpress integration 
 Plugin URI: http://work.kropes.cz/wordpress/kropes_presta4wp
 Description: Prestashop integration into wordpress (widgets) 
-Version: 0.6 
+Version: 0.4 
 Author: Michal Prokeš 
 Author URI: http://work.kropes.cz
 */
@@ -129,18 +129,21 @@ function kropes_presta4wp_assoc_categories($post_id){
 
 
 ?>
-<ul class="category_slider jcarousel jcarousel-skin-zbych">
+<ul class="category_slider jcarousel jcarousel-skin-zbych'">
   <?php foreach((array)$categories AS $c) : ?>
 	<?php
 	  $name = $xml->xpath('categories/category[id='.$c.']/name/language[@id=6]');
           $name = (string)$name[0];
 	?>
 	<li>
-		<a class="img" href="<?php echo $options['url']."/cs/$c-category"; ?>" ><img class="category_img" src="<?php echo $options['url']."/c/$c-home/image.jpg"; ?>"></a>
+		<a class="img" href=""><img class="category_img" src="<?php echo $options['url']."/c/$c-home/image.jpg"; ?>"></a>
 		<h4><?php echo $name; ?></h4>
 	</li>
    <?php endforeach; ?>
 </ul>
+
+<div id="kolomy-next" class="jcarousel-skin-zbych jcarousel-next jcarousel-next-horizontal ">Next</div>
+<div id="kolomy-prev" class="jcarousel-skin-zbych jcarousel-next jcarousel-next-horizontal ">Prev</div>
 <?php endif; ?>
 
 
