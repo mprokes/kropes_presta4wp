@@ -48,7 +48,7 @@ class KropesPrestaProductsSliderWidget extends WP_Widget {
           }
 
 	  $xml = $ws->get(array('resource' => 'products', 'filter[id]'=>"[".implode('|',$filtrid)."]", 'display'=>'full', 'filter[active]'=>"[1]" ));
-	  echo "<ul class='jcarousel jcarousel-skin-tango'>";
+	  echo "<ul class='jcarousel jcarousel-skin-zbych'>";
 	  foreach ($xml->products->product as $attName => $r){
 		$name = $r->name->xpath("language[@id=6]");
 		$name = (string)$name[0];
