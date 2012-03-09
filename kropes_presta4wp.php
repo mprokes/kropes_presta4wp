@@ -105,4 +105,30 @@ class Presta4wp {
   }
 }
 
+
+function kropes_presta4wp_assoc_categories(){
+global $post;
+?>
+<aside class="vypis_kategorii">
+<h2>Máte zájem o <? get_post_meta( $post->ID, 'presta4wp_title', true ); ?>?</h2>
+<h3>Navštivte náš <a href="/eshop">e-shop!</a> Med najdete v těchto kategoriích:</h3>
+<ul class="category_slider">
+	<li>
+		<a class="img" href=""><img class="category_img"></a>
+		<h4>Název kategorie</h4>
+	</li>
+		<li>
+		<a class="img" href=""><img class="category_img"></a>
+		<h4>Název kategorie</h4>
+	</li>
+		<li>
+		<a class="img" href=""><img class="category_img"></a>
+		<h4>Název kategorie</h4>
+	</li>
+</ul>
+<div style="clear: both"></div>
+</aside> <!-- .vypis_kategorii !-->
+<?
+}
+
 ?>
