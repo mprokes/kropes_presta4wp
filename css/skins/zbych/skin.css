@@ -3,7 +3,7 @@
 }
 
 .jcarousel-skin-zbych .jcarousel-clip-horizontal {
-    width:  90%;
+    width:  99%;
 }
 
 
@@ -11,6 +11,8 @@
     width: 34px;
     height: 34px;
     float: right;
+    margin-left: 10px;
+    margin-top: 10px;
     display: block;
     cursor: pointer;
     background: transparent url(zbych_next.png) no-repeat 0 0;
@@ -40,6 +42,7 @@
     height: 34px;
     cursor: pointer;
     float: right;
+    margin-top: 10px;
     background: transparent url(zbych_previous.png) no-repeat 0 0;
 }
 
