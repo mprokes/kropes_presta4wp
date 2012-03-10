@@ -3,7 +3,7 @@
 Plugin Name: Prestashop for Wordpress integration 
 Plugin URI: http://work.kropes.cz/wordpress/kropes_presta4wp
 Description: Prestashop integration into wordpress (widgets) 
-Version: 0.7 
+Version: 0.8 
 Author: Michal Prokeš 
 Author URI: http://work.kropes.cz
 */
@@ -142,8 +142,8 @@ function kropes_presta4wp_assoc_categories($post_id){
    <?php endforeach; ?>
 </ul>
 
-<a id="kolomy-prev" class="jcarousel-skin-zbych jcarousel-prev jcarousel-prev-horizontal "></a> 
 <a id="kolomy-next" class="jcarousel-skin-zbych jcarousel-next jcarousel-next-horizontal "></a>
+<a id="kolomy-prev" class="jcarousel-skin-zbych jcarousel-prev jcarousel-prev-horizontal "></a> 
 <?php endif; ?>
 
 
