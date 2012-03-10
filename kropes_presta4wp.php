@@ -142,8 +142,8 @@ function kropes_presta4wp_assoc_categories($post_id){
    <?php endforeach; ?>
 </ul>
 
-<a id="kolomy-prev" class="jcarousel-skin-zbych jcarousel-next jcarousel-next-horizontal ">Prev</a> 
-<a id="kolomy-next" class="jcarousel-skin-zbych jcarousel-next jcarousel-next-horizontal ">Next</a>
+<a id="kolomy-prev" class="jcarousel-skin-zbych jcarousel-prev jcarousel-prev-horizontal "></a> 
+<a id="kolomy-next" class="jcarousel-skin-zbych jcarousel-next jcarousel-next-horizontal "></a>
 <?php endif; ?>
 
 
