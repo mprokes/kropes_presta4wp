@@ -13,8 +13,8 @@ class KropesPrestaProductsWidget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'kropes_presta_products_widget', // Base ID
-			'Kropes Prestashop Products', // Name
-			array( 'description' => __( 'Vypíše produkty z kategorie HOME', 'presta4wp' ), ) // Args
+			'Kropes Prestashop Products List', // Name
+			array( 'description' => __( 'Vypíše produkty z kategorie HOME vertikálně', 'presta4wp' ), ) // Args
 		);
 	}
 

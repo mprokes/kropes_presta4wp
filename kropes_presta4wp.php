@@ -1,11 +1,10 @@
 <?php
 /*
-Plugin Name: Prestashop for Wordpress integration 
-Plugin URI: http://work.kropes.cz/wordpress/kropes_presta4wp
+Plugin Name: Kropes Prestashop for Wordpress 
 Description: Prestashop integration into wordpress (widgets) 
-Version: 0.8 
+Version: 0.9 
 Author: Michal Prokeš 
-Author URI: http://work.kropes.cz
+Author URI: http://kropes.cz
 */
 
 
@@ -20,9 +19,17 @@ add_action('wp_enqueue_scripts', array('Presta4wp','wp_enque_scripts'));
 
 require_once("KropesPrestaCategoriesMetabox.php");
 
+
+/**
+ * Presta4wp plugin class
+ */
 class Presta4wp {
+
+  /**
+   * Options page for this plugin
+   */
   function options(){
-	echo '<div><h2>Prestashop integration</h2><form action="options.php" method="post">';
+	echo '<div><h2>Kropes Prestashop for Wordpress</h2><form action="options.php" method="post">';
 	settings_fields('Presta4wp');
 	do_settings_sections('Presta4wp');
 	echo '<p class="submit"><input type="submit" class="button-primary" value="'.__('Save Changes').'" /></p></form></div>';
@@ -30,6 +37,9 @@ class Presta4wp {
 
   }
 
+  /**
+   *  Script and styles for this plugin
+   */
   function wp_enque_scripts(){
     wp_enqueue_script( 'jquery.jcarousel', plugins_url('js/jquery.jcarousel.min.js',__FILE__ ),array('jquery'));
     wp_enqueue_script( 'jquery.jcarousel.init', plugins_url('js/jquery.jcarousel.init.js',__FILE__),array('jquery.jcarousel'));
@@ -37,19 +47,45 @@ class Presta4wp {
 
   }
 
-  function section_text(){
-    #echo "Tady bude návod na získání API klíče";
+  /**
+   * Descriptioén how to get API key 
+   */
+  function section_main_text(){
+    echo "V administraci prestashop zvolte Tools->Webservice a <ul>";
+    echo "<li>Create new API key with permissions: categories/GET, languages/GET, products/GET</li>";
+    echo "<li>Enable PrestaShop Webservice: Yes</li>";
+    echo "</ul>";
   }
 
+  /**
+   * Description of widgets settings
+   */
+  function section_widgets_text(){
+    echo "Zvolte html vzory pro řádky (li) jednotlivých widgetů";
+  }
+
+
+
+
+  /**
+   * API key input
+   */
   function setting_key() {
 	$options = get_option('Presta4wp_options');
 	echo "<input id='Presta4wp_key' name='Presta4wp_options[key]' size='40' type='text' value='{$options['key']}' />";
   }
+
+  /** 
+   * Prestashop URL
+   */
   function setting_url() {
 	$options = get_option('Presta4wp_options');
 	echo "<input id='Presta4wp_url' name='Presta4wp_options[url]' size='40' type='text' value='{$options['url']}' />";
   }
 
+  /**
+   * LI template for Products Slider Widget
+   */
   function setting_psliderli() {
 	$options = get_option('Presta4wp_options');
 	$options['psliderli'] = $options['psliderli'] ? $options['psliderli'] : '<li class="product_list">
@@ -65,9 +101,12 @@ class Presta4wp {
 </div>
 </li>';
 	echo "<textarea id='Presta4wp_psliderli' name='Presta4wp_options[psliderli]' >{$options['psliderli']}</textarea>";
-	echo '<div>{$name} {$link} {$img} {$url} {$price} {$description} {$id}</div>';
+	echo '<div>Proměnné: {$name} {$link} {$img} {$url} {$price} {$description} {$id}</div>';
   }
 
+  /**
+   * LI template for Products List Widget
+   */
   function setting_pli() {
 	$options = get_option('Presta4wp_options');
 	$options['pli'] = $options['pli'] ? $options['pli'] : '<li>
@@ -77,26 +116,36 @@ class Presta4wp {
 <div class="price"><a href="{$link}">Cena {$price},- Kč</a></div>
 </li>';
 	echo "<textarea id='Presta4wp_pli' name='Presta4wp_options[pli]' >{$options['pli']}</textarea>";
-	echo '<div>{$name} {$link} {$img} {$url} {$price} {$description} {$id}</div>';
+	echo '<div>Proměnné: {$name} {$link} {$img} {$url} {$price} {$description} {$id}</div>';
   }
 
 
-
+  /**
+   * Admin menu with plugin options page
+   */
   function admin_menu(){
-    add_options_page('Custom Plugin Page', 'Prestashop4wp', 'manage_options', 'Presta4wp', array('Presta4wp','options'));
+    add_options_page('Prestashop integration Settings', 'Kropes Presta4wp', 'manage_options', 'Presta4wp', array('Presta4wp','options'));
   }
  
+
+  /**
+   * Admin hooks initialization 
+   */
   function admin_init(){
 	register_setting( 'Presta4wp', 'Presta4wp_options');
-	add_settings_section('Presta4wp_main', 'Main Settings', array('Presta4wp', 'section_text'),'Presta4wp');
+	add_settings_section('Presta4wp_main', 'Prestashop', array('Presta4wp', 'section_main_text'),'Presta4wp');
 	add_settings_field('Presta4wp_key', 'Prestashop API Key', array('Presta4wp','setting_key'), 'Presta4wp', 'Presta4wp_main');
 	add_settings_field('Presta4wp_url', 'Prestashop URL', array('Presta4wp','setting_url'), 'Presta4wp', 'Presta4wp_main');
 
-	add_settings_section('Presta4wp_widgets', 'Widgets Settings', array('Presta4wp', 'section_text'),'Presta4wp');
-	add_settings_field('Presta4wp_psliderli', 'Product Slider source', array('Presta4wp','setting_psliderli'), 'Presta4wp', 'Presta4wp_widgets');
-	add_settings_field('Presta4wp_pli', 'Product  source', array('Presta4wp','setting_pli'), 'Presta4wp', 'Presta4wp_widgets');
+	add_settings_section('Presta4wp_widgets', 'Wordpress Widgety', array('Presta4wp', 'section_widgets_text'),'Presta4wp');
+	add_settings_field('Presta4wp_psliderli', 'Product Slider Widget', array('Presta4wp','setting_psliderli'), 'Presta4wp', 'Presta4wp_widgets');
+	add_settings_field('Presta4wp_pli', 'Product List Widget', array('Presta4wp','setting_pli'), 'Presta4wp', 'Presta4wp_widgets');
   }
 
+
+  /**
+   * Widgets initialization
+   */
   function widgets_init(){
     require_once('KropesPrestaProductsWidget.php');
     require_once('KropesPrestaProductsSliderWidget.php');
@@ -108,6 +157,9 @@ class Presta4wp {
 }
 
 
+/**
+ * Function for template to include post related categorie from shop
+ */
 function kropes_presta4wp_assoc_categories($post_id){
 
   $title = get_post_meta( $post_id, 'presta4wp_title', true );

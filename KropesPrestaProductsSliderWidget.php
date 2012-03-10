@@ -14,7 +14,7 @@ class KropesPrestaProductsSliderWidget extends WP_Widget {
 		parent::__construct(
 	 		'kropes_presta_products_slider_widget', // Base ID
 			'Kropes Prestashop Products Slider', // Name
-			array( 'description' => __( 'Vypíše produkty z kategorie HOME', 'presta4wp' ), ) // Args
+			array( 'description' => __( 'Vypíše produkty z kategorie HOME horizontálně', 'presta4wp' ), ) // Args
 		);
 	}
 
