@@ -2,7 +2,7 @@
 /*
 Plugin Name: Kropes Prestashop for Wordpress 
 Description: Prestashop integration into wordpress (widgets) 
-Version: 0.9.1
+Version: 0.9.2
 Author: Michal Prokeš 
 Author URI: http://kropes.cz
 */
@@ -188,7 +188,7 @@ function kropes_presta4wp_assoc_categories($post_id){
           $name = (string)$name[0];
 	?>
 	<li>
-		<a class="img" href=""><img class="category_img" src="<?php echo $options['url']."/c/$c-home/image.jpg"; ?>"></a>
+		<a class="img" href="/eshop/$c-category"><img class="category_img" src="<?php echo $options['url']."/c/$c-home/image.jpg"; ?>"></a>
 		<h4><?php echo $name; ?></h4>
 	</li>
    <?php endforeach; ?>
