@@ -5,6 +5,7 @@ Description: Prestashop integration into wordpress (widgets)
 Version: 0.9.3
 Author: Michal Prokeš 
 Author URI: http://kropes.cz
+Plugin URI: https://github.com/mprokes/kropes_presta4wp
 */
 
 
