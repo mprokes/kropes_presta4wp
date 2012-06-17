@@ -2,7 +2,7 @@
 /*
 Plugin Name: Kropes Prestashop for Wordpress 
 Description: Prestashop integration into wordpress (widgets) 
-Version: 0.9.3
+Version: 0.9.4
 Author: Michal Prokeš 
 Author URI: http://kropes.cz
 Plugin URI: https://github.com/mprokes/kropes_presta4wp
